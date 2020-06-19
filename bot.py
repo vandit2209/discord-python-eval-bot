@@ -108,4 +108,4 @@ async def eval(ctx, *, code):
     await ctx.send(f'```✅ Your code was completed with execution code 0 \n{str_obj.getvalue()}```')
 
 
-bot.run("NzIyNDAyMTk5MjAzNzQxNzM3.XuykVA.EFwtSNvpuf7MmegA727FvZo0U-8")
+bot.run("Your token here")
