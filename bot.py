@@ -5,12 +5,20 @@ import discord
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!')
+bot.remove_command("help")
 
 
 @bot.event
 async def on_ready():
     print('You are ready to go!')
 
+
+@bot.command()
+async def help(ctx):
+    embed = discord.Embed(title="Help", color=0x3975AA)
+    embed.add_field(name="help", value="Shows this message", inline=False)
+    embed.add_field(name="evaluate | eval | e", value="Evaluates the python code in the code block", inline=False)
+    return await ctx.send(embed=embed)
 
 @bot.command(aliases=["eval", "e"])
 async def evaluate(ctx, *, command):
