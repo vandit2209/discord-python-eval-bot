@@ -1,6 +1,7 @@
 import io
 import re
 import contextlib
+import discord
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!')
@@ -11,8 +12,9 @@ async def on_ready():
     print('You are ready to go!')
 
 
-@bot.command(aliases=["eval"])
+@bot.command(aliases=["eval", "e"])
 async def evaluate(ctx, *, command):
+    """Evaluate the given python code"""
     if match := re.fullmatch(r"(?:\n*)?`(?:``(?:py(?:thon)?\n)?((?:.|\n)*)``|(.*))`", command, re.DOTALL):
         code = match.group(1) if match.group(1) else match.group(2)
         str_obj = io.StringIO()  # Retrieves a stream of data
@@ -28,7 +30,8 @@ async def evaluate(ctx, *, command):
 ```
 {str_obj.getvalue()}
 ```""")
-    return await ctx.send('Invalid format')
+    embed = discord.Embed(description="Error: Invalid format", color=0xED2525)
+    return await ctx.send(embed=embed)
 
 
 bot.run("Token here")
